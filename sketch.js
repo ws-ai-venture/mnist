@@ -1,14 +1,7 @@
 let img, classifier, classifyButton, clearButton, label, isDrawing;
 
 let imageModelURL = "https://teachablemachine.withgoogle.com/models/wx1ChNS_g/";
-imageModelURL = "https://teachablemachine.withgoogle.com/models/IE1bVtHjU/";
-
-// const models = [
-//   {
-//     name: "Just 1s and 3s",
-//     url: "https://teachablemachine.withgoogle.com/models/wx1ChNS_g/"
-//   },
-// ]
+// imageModelURL = "https://teachablemachine.withgoogle.com/models/IE1bVtHjU/";
 
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + "model.json");
@@ -28,6 +21,14 @@ function setup() {
   link2.addEventListener("click", function (event) {
     event.preventDefault();
     clearImage();
+  });
+
+  const modelSelector = document.getElementById("modelSelector");
+  modelSelector.addEventListener("change", function () {
+    const selectedModelURL = modelSelector.value;
+    if (selectedModelURL) {
+      classifier = ml5.imageClassifier(selectedModelURL + "model.json");
+    }
   });
 
   background(0);
